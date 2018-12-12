@@ -1,21 +1,21 @@
 <?php
+// Авторизуем пользователя
+
 	$data = $_POST;
-	// echo var_dump($data);
-	//здесь проеряем и авторизуем
+	// если пользователь нажал "авторизоваться"
 	if( isset($data['do_login']) )
 	{
-		$errors = array();
-		$user = R::findOne('users', 'login = ?', array($data['login']));
+		$errors = array(); //массив под ошибки
+		$user = R::findOne('users', 'login = ?', array($data['login'])); // берём данные из БД
 		if($user)
 		{
-			//логин существует
+			//логин существует, про
 			if( password_verify($data['password'], $user->password))
 			{
-				//всё хорошо, логиним пользователя (используем сессии или кукисы)
+				//всё хорошо, логиним пользователя (используем сессии) и открываем страницу с его данными
 				$_SESSION['logged_user'] = $user;
 				header('Location:user-info.php');
 				exit;
-				// echo '<div style="color: green;">Вы авторизованы!<br>Можете перейти на <a href="/user-info.php">страницу пользователя</a></div><hr>';
 			} else
 			{
 				$errors[] = 'Неверно введён пароль';

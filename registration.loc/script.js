@@ -2,7 +2,6 @@ $(document).ready(function () {
 	// Табы на JS
 	$(".dws-form").on("click", ".tab", function() {
 		//удаляем классы active
-		// $(".dws-form .tab").removeClass("active");
 		$(".dws-form").find(".active").removeClass("active");
 
 		//Добавляем класс active
